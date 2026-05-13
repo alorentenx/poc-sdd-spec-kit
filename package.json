@@ -1,0 +1,10 @@
+{
+  "name": "daily-devlog-cli",
+  "version": "0.1.0",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "start": "node cli.js",
+    "test": "node --test"
+  }
+}

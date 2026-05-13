@@ -22,9 +22,9 @@
 
 **Purpose**: Project initialization and baseline tooling
 
-- [ ] T001 Create `tests/` directory and initial test file placeholders in tests/cli.test.js, tests/storage.test.js, tests/formatter.test.js
-- [ ] T002 Create `package.json` scripts for `test` and `start` in package.json
-- [ ] T003 Create `README.md` usage baseline aligned with contracts in README.md
+- [X] T001 Create `tests/` directory and initial test file placeholders in tests/cli.test.js, tests/storage.test.js, tests/formatter.test.js
+- [X] T002 Create `package.json` scripts for `test` and `start` in package.json
+- [X] T003 Create `README.md` usage baseline aligned with contracts in README.md
 
 ---
 
@@ -34,12 +34,12 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T004 Implement shared CLI argument parser and command router skeleton in cli.js
-- [ ] T005 [P] Implement storage path resolution and data-file bootstrap (`~/.devlog/entries.json`) in storage.js
-- [ ] T006 [P] Implement JSON schema load/save helpers (`version`, `entries`) in storage.js
-- [ ] T007 [P] Implement shared output format helpers for success, empty states, and errors in formatter.js
-- [ ] T008 Implement shared validation utilities for text, keyword, and days range (1..365) in cli.js
-- [ ] T009 Implement global error handling and non-zero exit mapping in cli.js
+- [X] T004 Implement shared CLI argument parser and command router skeleton in cli.js
+- [X] T005 [P] Implement storage path resolution and data-file bootstrap (`~/.devlog/entries.json`) in storage.js
+- [X] T006 [P] Implement JSON schema load/save helpers (`version`, `entries`) in storage.js
+- [X] T007 [P] Implement shared output format helpers for success, empty states, and errors in formatter.js
+- [X] T008 Implement shared validation utilities for text, keyword, and days range (1..365) in cli.js
+- [X] T009 Implement global error handling and non-zero exit mapping in cli.js
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -53,16 +53,16 @@
 
 ### Tests for User Story 1 (REQUIRED when core logic is affected) ⚠️
 
-- [ ] T010 [P] [US1] Add unit tests for entry validation and timestamp generation in tests/storage.test.js
-- [ ] T011 [P] [US1] Add CLI integration tests for `add` success/error flows in tests/cli.test.js
+- [X] T010 [P] [US1] Add unit tests for entry validation and timestamp generation in tests/storage.test.js
+- [X] T011 [P] [US1] Add CLI integration tests for `add` success/error flows in tests/cli.test.js
 
 ### Implementation for User Story 1
 
-- [ ] T012 [US1] Implement `createEntry(text)` with `id`, `text`, `createdAt` in storage.js
-- [ ] T013 [US1] Implement retention cleanup (>365 days) during write operations in storage.js
-- [ ] T014 [US1] Implement `add` command flow and argument capture in cli.js
-- [ ] T015 [US1] Implement add confirmation output formatting in formatter.js
-- [ ] T016 [US1] Handle empty/blank text error path for `add` in cli.js
+- [X] T012 [US1] Implement `createEntry(text)` with `id`, `text`, `createdAt` in storage.js
+- [X] T013 [US1] Implement retention cleanup (>365 days) during write operations in storage.js
+- [X] T014 [US1] Implement `add` command flow and argument capture in cli.js
+- [X] T015 [US1] Implement add confirmation output formatting in formatter.js
+- [X] T016 [US1] Handle empty/blank text error path for `add` in cli.js
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
@@ -76,16 +76,16 @@
 
 ### Tests for User Story 2 (REQUIRED when core logic is affected) ⚠️
 
-- [ ] T017 [P] [US2] Add unit tests for date-window filtering (`today`, `recent`) in tests/storage.test.js
-- [ ] T018 [P] [US2] Add CLI integration tests for `today` and `recent --days N` including invalid N in tests/cli.test.js
+- [X] T017 [P] [US2] Add unit tests for date-window filtering (`today`, `recent`) in tests/storage.test.js
+- [X] T018 [P] [US2] Add CLI integration tests for `today` and `recent --days N` including invalid N in tests/cli.test.js
 
 ### Implementation for User Story 2
 
-- [ ] T019 [US2] Implement `listToday()` with local-date filtering in storage.js
-- [ ] T020 [US2] Implement `listRecent(days)` with range validation 1..365 in storage.js
-- [ ] T021 [US2] Implement `today` and `recent --days` command handlers in cli.js
-- [ ] T022 [US2] Implement list rendering for grouped/ordered entries in formatter.js
-- [ ] T023 [US2] Implement empty-state messages for `today` and `recent` in formatter.js
+- [X] T019 [US2] Implement `listToday()` with local-date filtering in storage.js
+- [X] T020 [US2] Implement `listRecent(days)` with range validation 1..365 in storage.js
+- [X] T021 [US2] Implement `today` and `recent --days` command handlers in cli.js
+- [X] T022 [US2] Implement list rendering for grouped/ordered entries in formatter.js
+- [X] T023 [US2] Implement empty-state messages for `today` and `recent` in formatter.js
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
 
@@ -99,14 +99,14 @@
 
 ### Tests for User Story 3 (REQUIRED when core logic is affected) ⚠️
 
-- [ ] T024 [P] [US3] Add unit tests for case-insensitive substring search in tests/storage.test.js
-- [ ] T025 [P] [US3] Add CLI integration tests for `search` results/no-results/error in tests/cli.test.js
+- [X] T024 [P] [US3] Add unit tests for case-insensitive substring search in tests/storage.test.js
+- [X] T025 [P] [US3] Add CLI integration tests for `search` results/no-results/error in tests/cli.test.js
 
 ### Implementation for User Story 3
 
-- [ ] T026 [US3] Implement `searchEntries(keyword)` by case-insensitive substring in storage.js
-- [ ] T027 [US3] Implement `search` command handler and keyword validation in cli.js
-- [ ] T028 [US3] Implement search result and no-match formatting in formatter.js
+- [X] T026 [US3] Implement `searchEntries(keyword)` by case-insensitive substring in storage.js
+- [X] T027 [US3] Implement `search` command handler and keyword validation in cli.js
+- [X] T028 [US3] Implement search result and no-match formatting in formatter.js
 
 **Checkpoint**: All user stories should now be independently functional
 
@@ -116,10 +116,10 @@
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T029 [P] Add formatter-focused unit tests for output consistency in tests/formatter.test.js
-- [ ] T030 Update quickstart and command examples to match final behavior in specs/001-daily-devlog-cli/quickstart.md
-- [ ] T031 Run full test suite and fix residual defects in tests/cli.test.js, tests/storage.test.js, tests/formatter.test.js
-- [ ] T032 Add/adjust help text and usage docs for all commands in cli.js and README.md
+- [X] T029 [P] Add formatter-focused unit tests for output consistency in tests/formatter.test.js
+- [X] T030 Update quickstart and command examples to match final behavior in specs/001-daily-devlog-cli/quickstart.md
+- [X] T031 Run full test suite and fix residual defects in tests/cli.test.js, tests/storage.test.js, tests/formatter.test.js
+- [X] T032 Add/adjust help text and usage docs for all commands in cli.js and README.md
 
 ---
 
