@@ -5,6 +5,7 @@
   "type": "commonjs",
   "scripts": {
     "start": "node cli.js",
+    "start:web": "node server.js",
     "test": "node --test"
   }
 }

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Devlog Frontend</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="container">
+    <h1>Devlog</h1>
+
+    <section class="card">
+      <h2>Nueva entrada</h2>
+      <form id="entry-form">
+        <textarea id="entry-text" placeholder="¿Qué hiciste hoy?" required></textarea>
+        <button id="entry-submit" type="submit">Guardar entrada</button>
+      </form>
+      <p id="entry-feedback" class="feedback"></p>
+    </section>
+
+    <section class="card">
+      <h2>Consultas</h2>
+      <div class="row">
+        <button id="load-today" type="button">Ver hoy</button>
+        <label for="recent-days">Últimos días</label>
+        <input id="recent-days" type="number" min="1" max="365" value="7">
+        <button id="load-recent" type="button">Ver recientes</button>
+      </div>
+      <div class="row">
+        <input id="search-keyword" type="text" placeholder="Buscar keyword">
+        <button id="run-search" type="button">Buscar</button>
+      </div>
+      <p id="query-feedback" class="feedback"></p>
+      <ul id="entries-list" class="entries"></ul>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

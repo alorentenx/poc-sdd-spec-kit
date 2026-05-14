@@ -1,0 +1,80 @@
+:root {
+  --bg: #f4f6f8;
+  --fg: #1e2933;
+  --accent: #0d6e6e;
+  --danger: #9f1239;
+  --ok: #166534;
+  --card: #ffffff;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  background: radial-gradient(circle at top, #dce7ef, var(--bg));
+  color: var(--fg);
+}
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 24px;
+}
+.card {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+}
+textarea, input, button {
+  font: inherit;
+}
+textarea {
+  width: 100%;
+  min-height: 92px;
+  margin-bottom: 8px;
+}
+.row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+button {
+  border: 0;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+button:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+.feedback {
+  min-height: 1.2em;
+}
+.feedback.error {
+  color: var(--danger);
+}
+.feedback.ok {
+  color: var(--ok);
+}
+.entries {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+}
+.entries li {
+  background: #f8fbff;
+  border: 1px solid #d6e5f3;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 8px;
+}
+.meta {
+  font-size: 12px;
+  opacity: 0.75;
+}

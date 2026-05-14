@@ -52,7 +52,8 @@ function applyRetention(entries, now = new Date()) {
 
 async function loadData() {
   await ensureStorageFile();
-  const content = await fs.readFile(getStoragePath(), "utf8");
+  const file = getStoragePath();
+  const content = await fs.readFile(file, "utf8");
   let parsed;
   try {
     parsed = JSON.parse(content);
@@ -60,12 +61,27 @@ async function loadData() {
     parsed = defaultData();
   }
   const entries = normalizeEntries(parsed.entries || []);
-  return { version: 1, entries };
+  const stat = await fs.stat(file);
+  return { version: 1, entries, revision: stat.mtimeMs };
 }
 
 async function saveData(data) {
   await ensureStorageFile();
-  await fs.writeFile(getStoragePath(), JSON.stringify(data, null, 2), "utf8");
+  const payload = { version: 1, entries: normalizeEntries(data.entries || []) };
+  await fs.writeFile(getStoragePath(), JSON.stringify(payload, null, 2), "utf8");
+}
+
+async function saveDataIfUnchanged(data, expectedRevision) {
+  await ensureStorageFile();
+  const file = getStoragePath();
+  const stat = await fs.stat(file);
+  if (typeof expectedRevision === "number" && stat.mtimeMs !== expectedRevision) {
+    const err = new Error("write conflict");
+    err.code = "WRITE_CONFLICT";
+    throw err;
+  }
+  const payload = { version: 1, entries: normalizeEntries(data.entries || []) };
+  await fs.writeFile(file, JSON.stringify(payload, null, 2), "utf8");
 }
 
 function toLocalDateKey(date) {
@@ -92,6 +108,21 @@ async function addEntry(text) {
   };
   data.entries = sortDesc([entry, ...retained]);
   await saveData(data);
+  return entry;
+}
+
+async function addEntryWithConflictDetection(text) {
+  const cleanText = text.trim();
+  if (!cleanText) throw new Error("text cannot be empty");
+  const data = await loadData();
+  const retained = applyRetention(data.entries);
+  const entry = {
+    id: crypto.randomUUID ? crypto.randomUUID() : `e_${Date.now()}`,
+    text: cleanText,
+    createdAt: new Date().toISOString(),
+  };
+  data.entries = sortDesc([entry, ...retained]);
+  await saveDataIfUnchanged(data, data.revision);
   return entry;
 }
 
@@ -130,7 +161,9 @@ module.exports = {
   ensureStorageFile,
   loadData,
   saveData,
+  saveDataIfUnchanged,
   addEntry,
+  addEntryWithConflictDetection,
   listToday,
   listRecent,
   searchEntries,

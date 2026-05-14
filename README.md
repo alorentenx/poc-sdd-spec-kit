@@ -73,6 +73,25 @@ devlog/
 - `storage.js`: lectura/escritura JSON en `~/.devlog/entries.json`
 - `formatter.js`: presentación de salidas y errores
 
+## Nuevo: Frontend + servidor web local
+
+Se añadió una interfaz web local y un servidor HTTP sin dependencias externas:
+
+- `server.js`: API HTTP local + servido de archivos estáticos
+- `frontend/index.html`: interfaz de usuario
+- `frontend/styles.css`: estilos base
+- `frontend/app.js`: lógica de UI y llamadas a la API
+- `tests/server.test.js`: tests de contrato HTTP
+- `tests/frontend.smoke.test.js`: smoke test de carga de frontend
+
+Capacidades del frontend (v1):
+- crear entrada
+- listar entradas de hoy
+- listar entradas recientes (`1..365`)
+- buscar por keyword (subcadena, case-insensitive)
+- mostrar estados de éxito, vacío y error
+- manejo de conflicto concurrente (`WRITE_CONFLICT`) con reintento
+
 ## Uso
 
 ```bash
@@ -86,6 +105,30 @@ node cli.js recent --days 7
 node cli.js search parser
 node cli.js search BUG
 ```
+
+## Frontend local
+
+### Arranque
+
+```bash
+npm run start:web
+```
+
+Abre `http://localhost:3000` y usa:
+- alta de entrada desde formulario
+- vista de hoy
+- vista de recientes (`1..365`)
+- búsqueda por keyword (subcadena, case-insensitive)
+
+El frontend y la CLI comparten el mismo almacenamiento JSON.
+
+### Endpoints disponibles
+
+- `GET /health`
+- `POST /api/entries`
+- `GET /api/entries/today`
+- `GET /api/entries/recent?days=7`
+- `GET /api/entries/search?keyword=texto`
 
 ## Datos
 
