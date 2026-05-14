@@ -8,6 +8,9 @@ const {
   toLocalDateKey,
   MAX_RETENTION_DAYS,
   addEntry,
+  getStoragePath,
+  loadData,
+  saveDataIfUnchanged,
   listToday,
   listRecent,
   searchEntries,
@@ -50,4 +53,29 @@ test("listToday/listRecent/searchEntries work end-to-end", async () => {
 
   const search2 = await searchEntries("PARSER", new Date());
   assert.ok(search2.some((e) => e.text === "Implementé parser CLI"));
+});
+
+test("saveDataIfUnchanged throws on concurrent modification", async () => {
+  const tmp = await fs.mkdtemp(path.join(os.tmpdir(), "devlog-conflict-"));
+  process.env.HOME = tmp;
+  process.env.USERPROFILE = tmp;
+
+  await addEntry("baseline");
+  const file = getStoragePath();
+  const snapshot = await loadData();
+
+  const original = JSON.parse(await fs.readFile(file, "utf8"));
+  original.entries.push({
+    id: "external",
+    text: "external write",
+    createdAt: new Date().toISOString(),
+  });
+  await fs.writeFile(file, JSON.stringify(original, null, 2), "utf8");
+
+  snapshot.entries.push({
+    id: "new",
+    text: "new from web",
+    createdAt: new Date().toISOString(),
+  });
+  await assert.rejects(() => saveDataIfUnchanged(snapshot, snapshot.revision), (err) => err.code === "WRITE_CONFLICT");
 });
